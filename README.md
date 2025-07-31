@@ -1,3 +1,4 @@
+
 # Socket Chat App
 
 A real-time chat application with user presence and avatar support built using React and a custom WebSocket client (`TelepartyClient`).
@@ -42,24 +43,30 @@ Live demo: [https://socket-chat-app-murex.vercel.app/](https://socket-chat-app-m
 
 1. **Clone the repository**
 
+```
 git clone https://github.com/amankushwaha0606/socket_chat_app.git
 cd socket_chat_app
-
+```
 
 2. **Install dependencies**
 
+```
 npm install
 # or
 yarn install
-
+```
 
 3. **Run the app locally**
 
+```
 npm start
 # or
 yarn start
+```
 
-The app will open at [http://localhost:5173](http://localhost:5173).
+The app will open at [http://localhost:3000](http://localhost:3000).
+
+---
 
 ## Project Structure
 
@@ -142,6 +149,3 @@ For questions or feedback, feel free to reach out to Aman Kushwaha.
 ---
 
 **Thank you for trying out my Socket Chat App!**
-```
-
-Let me know if you want it in any other format or extended with contribution guidelines or CI setup!
