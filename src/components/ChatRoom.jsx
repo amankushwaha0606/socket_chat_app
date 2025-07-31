@@ -8,7 +8,7 @@ import { SocketMessageTypes } from "../utils/teleparty-websocket-lib/SocketMessa
 const ChatRoom = ({ roomId, nickname, avatarSeed, setRoomId }) => {
   const [messages, setMessages] = useState([]);
   const [anyoneTyping, setAnyoneTyping] = useState(false);
-  const [userId, setUserId] = useState(null);
+  const userIdRef = useRef(undefined);
   const clientRef = useRef(null);
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const ChatRoom = ({ roomId, nickname, avatarSeed, setRoomId }) => {
       onMessage: (socketMessage) => {
         switch (socketMessage.type) {
           case "userId":
-            setUserId(socketMessage.data.userId);
+            userIdRef.current = socketMessage.data.userId;
             break;
           case SocketMessageTypes.SEND_MESSAGE:
             setMessages((prev) => [...prev, socketMessage.data]);
@@ -49,7 +49,7 @@ const ChatRoom = ({ roomId, nickname, avatarSeed, setRoomId }) => {
           case SocketMessageTypes.SET_TYPING_PRESENCE: {
             console.log("Typing presence:", socketMessage.data);
             const typingUserIds = socketMessage.data.usersTyping || [];
-            if (typingUserIds.includes(userId)) {
+            if (typingUserIds.includes(userIdRef.current)) {
               setAnyoneTyping(false);
             } else {
               setAnyoneTyping(socketMessage.data.anyoneTyping);
@@ -78,7 +78,7 @@ const ChatRoom = ({ roomId, nickname, avatarSeed, setRoomId }) => {
       body,
       userNickname: nickname,
       userIcon: avatarSeed,
-      userId,
+      userId: userIdRef.current,
     });
   };
 
@@ -95,7 +95,7 @@ const ChatRoom = ({ roomId, nickname, avatarSeed, setRoomId }) => {
         Nickname: <strong>{nickname}</strong> | Avatar:{" "}
         <strong>{avatarSeed}</strong>
       </div>
-      <MessageList messages={messages} currentUserId={userId} />
+      <MessageList messages={messages} currentUserId={userIdRef.current} />
       <TypingIndicator isTyping={anyoneTyping} />
       <MessageInput sendMessage={sendMessage} sendTyping={sendTyping} />
     </div>

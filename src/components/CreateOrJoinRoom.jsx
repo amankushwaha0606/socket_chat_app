@@ -56,7 +56,7 @@ const CreateOrJoinRoom = ({
       </div>
       <button
         onClick={handleCreate}
-        className="w-full bg-blue-600 hover:bg-blue-700 !text-white p-2 rounded mb-3"
+        className="w-full !bg-blue-600 hover:!bg-blue-700 !text-gray-100 p-2 rounded mb-3 !border !border-blue-600 hover:!border-blue-700"
       >
         Create Room
       </button>
@@ -69,7 +69,7 @@ const CreateOrJoinRoom = ({
       />
       <button
         onClick={handleJoin}
-        className="w-full bg-green-600 hover:bg-green-700 !text-white p-2 rounded"
+        className="w-full !bg-blue-600 hover:!bg-blue-700 !text-gray-100 p-2 rounded mb-3 !border !border-blue-600 hover:!border-blue-700"
       >
         Join Room
       </button>
